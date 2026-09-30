@@ -16,7 +16,7 @@ function actualizarPresupuesto(nuevoPresupuesto) {
 
 function mostrarPresupuesto() {
     // TODO Función sin parámetros que se encargará de devolver el texto siguiente: Tu presupuesto actual es de X €.
-    
+    return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
 function CrearGasto() {
