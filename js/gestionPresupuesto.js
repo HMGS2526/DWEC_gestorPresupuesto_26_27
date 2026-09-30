@@ -19,9 +19,35 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto() {
-    // TODO Función constructora que se encargará de crear un objeto gasto. Esta función devolverá un objeto de tipo gasto. Deberá comprobar que el valor introducido sea un núḿero no negativo; en caso contrario, asignará a la propiedad valor el valor 0.
+function CrearGasto(descripcion, valor) {
+    // TODO Función constructora que se encargará de crear un objeto gasto. Esta función devolverá un objeto de tipo gasto. Deberá comprobar que el valor introducido sea un núḿero no negativo; en caso contrario, asignará a la propiedad valor el valor 0
+    valor = parseFloat(valor);
+    if (isNaN(valor) || valor < 0) {
+        valor = 0;
+    }
+
+    this.descripcion = descripcion;
+    this.valor = valor;
+
+    this.mostrarGasto = function () {
+        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €`;
+    };
+
+    this.actualizarDescripcion = function (nuevaDescripcion) {
+        this.descripcion = nuevaDescripcion;
+    };
+
+    this.actualizarValor = function (nuevoValor) {
+        nuevoValor = parseFloat(nuevoValor);
+        // Solo se actualiza si es un número no negativo
+        if (!isNaN(nuevoValor) && nuevoValor >= 0) {
+            this.valor = nuevoValor;
+        }
+    };
 }
+    
+
+
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
