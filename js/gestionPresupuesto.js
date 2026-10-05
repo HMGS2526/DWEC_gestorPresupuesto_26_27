@@ -125,8 +125,12 @@ Función sin parámetros que devuelva la suma de todos los gastos creados en la 
     function calcularTotalGastos() {
         return gastos.reduce((total, gasto) => total + gasto.valor, 0);
     }
+/*Función calcularBalance
 
-    function calcularBalance() {}
+Función sin parámetros que devuelva el balance (presupuesto - gastos totales) disponible. De momento no lo obtendremos por período temporal (lo haremos en sucesivas prácticas). Puede utilizar a su vez la función calcularTotalGastos.*/
+    function calcularBalance() {
+        return presupuesto - calcularTotalGastos();
+    }
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
