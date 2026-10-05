@@ -108,7 +108,11 @@ Añadir al objeto gasto pasado como parámetro una propiedad id cuyo valor será
 Incrementar el valor de la variable global idGasto.
 Añadir el objeto gasto pasado como parámetro a la variable global gastos. El gasto se debe añadir al final del array.*/
 
-    function anyadirGasto(gasto){}
+    function anyadirGasto(gasto){
+        gasto.id = idGasto;
+        idGasto++;
+        gastos.push(gasto);
+    }
 
     function borrarGasto(id) {}
 
