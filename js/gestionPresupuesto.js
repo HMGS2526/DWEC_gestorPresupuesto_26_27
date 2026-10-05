@@ -1,5 +1,7 @@
 // TODO: Crear las funciones, objetos y variables indicadas en el enunciado
 let presupuesto = 0
+let gastos = []
+let idGasto = 0
 // TODO: Variable global
 
 function actualizarPresupuesto(nuevoPresupuesto) {
@@ -45,7 +47,10 @@ function CrearGasto(descripcion, valor) {
         }
     };
 }
-    
+//Función listarGastos: Función sin parámetros que devolverá la variable global gastos.
+    function listarGastos() {
+        return gastos;
+    }
 
 
 
@@ -56,4 +61,9 @@ export   {
     mostrarPresupuesto,
     actualizarPresupuesto,
     CrearGasto
+    listarGastos
+    anyadirGasto
+    borrarGasto
+    calcularTotalGastos
+    calcularBalance
 }
