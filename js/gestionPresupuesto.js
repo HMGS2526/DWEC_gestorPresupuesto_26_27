@@ -113,10 +113,18 @@ Añadir el objeto gasto pasado como parámetro a la variable global gastos. El g
         idGasto++;
         gastos.push(gasto);
     }
+/*Función borrarGasto
 
-    function borrarGasto(id) {}
+Función de 1 parámetro que eliminará de la variable global gastos el objeto gasto cuyo id haya sido pasado como parámetro. Si no existe un gasto con el id proporcionado, no hará nada.*/
+    function borrarGasto(id) {
+        gastos = gastos.filter(gasto => gasto.id !== id);
+    }
+/*Función calcularTotalGastos
 
-    function calcularTotalGastos() {}
+Función sin parámetros que devuelva la suma de todos los gastos creados en la variable global gastos. De momento no los agruparemos por período temporal (lo haremos en sucesivas prácticas).*/
+    function calcularTotalGastos() {
+        return gastos.reduce((total, gasto) => total + gasto.valor, 0);
+    }
 
     function calcularBalance() {}
 
