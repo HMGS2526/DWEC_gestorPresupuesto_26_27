@@ -21,38 +21,100 @@ function mostrarPresupuesto() {
     return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto(descripcion, valor) {
-    // TODO Función constructora que se encargará de crear un objeto gasto. Esta función devolverá un objeto de tipo gasto. Deberá comprobar que el valor introducido sea un núḿero no negativo; en caso contrario, asignará a la propiedad valor el valor 0
-    valor = parseFloat(valor);
-    if (isNaN(valor) || valor < 0) {
-        valor = 0;
-    }
+function CrearGasto(descripcion, valor, fecha = new Date().toISOString(), ...etiquetas) {
+    /*Función CrearGasto: Actualiza la función constructora para que incluya la fecha y las etiquetas (ver apartado de Objeto gasto). Los parámetros adicionales de la función deben ir a continuación de los existentes.
+· Si no se indican los parámetros de etiquetas, se almacenará en la propiedad etiquetas un array vacío.
 
+· Si no se indica el parámetro fecha, se almacenará en la propiedad fecha la fecha actual.El parámetro fecha deberá ser un string con formato válido que pueda entender la función Date.parse.
+
+· Si la fecha no es válida (no sigue el formato indicado), se deberá almacenar la fecha actual en su lugar.
+
+· Tal como se indica en la sección de objeto gasto, la fecha se almacenará en formato timestamp.Las etiquetas se pasarán como una lista de parámetros de número indeterminado.
+
+· Para añadir las etiquetas se utilizará el método anyadirEtiquetas explicado en la sección de objeto gasto.*/
     this.descripcion = descripcion;
-    this.valor = valor;
-
+ 
+    this.valor = 0;
+    if (typeof valor === "number" && !isNaN(valor) && valor >= 0) {
+        this.valor = valor;
+    }
+ 
+    this.fecha = Date.now();
+    if (typeof fecha === "string") {
+        let timestamp = Date.parse(fecha);
+        if (!isNaN(timestamp)) {
+            this.fecha = timestamp;
+        }
+    }
+ 
+    this.etiquetas = [];
+ //mostrarGasto - Función sin parámetros que devolverá el texto: Gasto correspondiente a DESCRIPCION con valor VALOR €, siendo VALOR y DESCRIPCION las propiedades del objeto correspondientes.
     this.mostrarGasto = function () {
         return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €`;
     };
-
+ //mostrarGastoCompleto - Función sin parámetros que devuelva el texto multilínea siguiente (ejemplo para un gasto con tres etiquetas)
+    this.mostrarGastoCompleto = function () {
+        let texto = `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €.\n`;
+        texto += `Fecha: ${new Date(this.fecha).toLocaleString()}\n`;
+        texto += "Etiquetas:\n";
+        for (let etiqueta of this.etiquetas) {
+            texto += `- ${etiqueta}\n`;
+        }
+        return texto;
+    };
+ //actualizarDescripcion - Función de 1 parámetro que actualizará la descripción del objeto.
     this.actualizarDescripcion = function (nuevaDescripcion) {
         this.descripcion = nuevaDescripcion;
     };
-
+ //actualizarValor - Función de 1 parámetro que actualizará el valor del objeto. Se encargará de comprobar que el valor introducido sea un número no negativo; en caso contrario, dejará el valor como estaba.
     this.actualizarValor = function (nuevoValor) {
-        nuevoValor = parseFloat(nuevoValor);
-        // Solo se actualiza si es un número no negativo
-        if (!isNaN(nuevoValor) && nuevoValor >= 0) {
+        if (typeof nuevoValor === "number" && !isNaN(nuevoValor) && nuevoValor >= 0) {
             this.valor = nuevoValor;
         }
     };
+ //actualizarFecha - Función de 1 parámetro que actualizará la propiedad fecha del objeto. Deberá recibir la fecha en formato string que sea entendible por la función Date.parse. Si la fecha no es válida, se dejará sin modificar.//
+    this.actualizarFecha = function (nuevaFecha) {
+        if (typeof nuevaFecha === "string") {
+            let ts = Date.parse(nuevaFecha);
+            if (!isNaN(ts)) {
+                this.fecha = ts;
+            }
+        }
+    };
+ //anyadirEtiquetas - Función de un número indeterminado de parámetros que añadirá las etiquetas pasadas como parámetro a la propiedad etiquetas del objeto. Deberá comprobar que no se creen duplicados.
+    this.anyadirEtiquetas = function (...nuevasEtiquetas) {
+        for (let etiqueta of nuevasEtiquetas) {
+            if (!this.etiquetas.includes(etiqueta)) {
+                this.etiquetas.push(etiqueta);
+            }
+        }
+    };
+ //borrarEtiquetas - Función de un número indeterminado de parámetros que recibirá uno o varios nombres de etiquetas y procederá a eliminarlas (si existen) de la propiedad etiquetas del objeto.
+    this.borrarEtiquetas = function (...etiquetasABorrar) {
+        this.etiquetas = this.etiquetas.filter(e => !etiquetasABorrar.includes(e));
+    };
+ // Añade las etiquetas recibidas en el constructor
+    this.anyadirEtiquetas(...etiquetas);
 }
 //Función listarGastos: Función sin parámetros que devolverá la variable global gastos.
     function listarGastos() {
         return gastos;
     }
+/*Función anyadirGasto
 
+Función de 1 parámetro que realizará tres tareas:
 
+Añadir al objeto gasto pasado como parámetro una propiedad id cuyo valor será el valor actual de la variable global idGasto.
+Incrementar el valor de la variable global idGasto.
+Añadir el objeto gasto pasado como parámetro a la variable global gastos. El gasto se debe añadir al final del array.*/
+
+    function anyadirGasto(gasto){}
+
+    function borrarGasto(id) {}
+
+    function calcularTotalGastos() {}
+
+    function calcularBalance() {}
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
@@ -60,10 +122,10 @@ function CrearGasto(descripcion, valor) {
 export   {
     mostrarPresupuesto,
     actualizarPresupuesto,
-    CrearGasto
-    listarGastos
-    anyadirGasto
-    borrarGasto
-    calcularTotalGastos
+    CrearGasto,
+    listarGastos,
+    anyadirGasto,
+    borrarGasto,
+    calcularTotalGastos,
     calcularBalance
 }
