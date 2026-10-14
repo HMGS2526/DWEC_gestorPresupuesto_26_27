@@ -131,9 +131,59 @@ Función sin parámetros que devuelva el balance (presupuesto - gastos totales) 
     function calcularBalance() {
         return presupuesto - calcularTotalGastos();
     }
+/*Función filtrarGastos
 
-    function filtrarGastos() {}
+Función de un parámetro que devolverá un subconjunto de los gastos existentes (variable global gastos). Se deberá utilizar la función filter. El parámetro será un objeto que podrá tener las siguientes propiedades:
 
+fechaDesde - Fecha mínima de creación del gasto. Su valor deberá ser un string con formato válido que pueda entender la función Date.parse.
+fechaHasta - Fecha máxima de creación del gasto. Su valor deberá ser un string con formato válido que pueda entender la función Date.parse.
+valorMinimo - Valor mínimo del gasto.
+valorMaximo - Valor máximo del gasto.
+descripcionContiene - Trozo de texto que deberá aparecer en la descripción. Deberá hacerse la comparación de manera que no se distingan mayúsculas de minúsculas.
+etiquetasTiene - Array de etiquetas: si un gasto contiene alguna de las etiquetas indicadas en este parámetro, se deberá devolver en el resultado. Deberá hacerse la comparación de manera que no se distingan mayúsculas de minúsculas.*/
+    function filtrarGastos(filtros) {
+        return gastos.filter(gasto => {
+            if (filtros.fechaDesde) {
+                const fechaDesde = new Date(filtros.fechaDesde);
+                if (new Date(gasto.fecha) < fechaDesde) {
+                    return false;
+                }
+            }
+            if (filtros.fechaHasta) {
+                const fechaHasta = new Date(filtros.fechaHasta);
+                if (new Date(gasto.fecha) > fechaHasta) {
+                    return false;
+                }
+            }
+            if (filtros.valorMinimo){
+                const valorMinimo = filtros.valorMinimo;
+                if (gasto.valor < valorMinimo) {
+                    return false;
+                }
+            }
+            if (filtros.valorMaximo){
+                const valorMaximo = filtros.valorMaximo;
+                if (gasto.valor > valorMaximo) {
+                    return false;
+                }
+            }
+            //descripcionContiene - Trozo de texto que deberá aparecer en la descripción. Deberá hacerse la comparación de manera que no se distingan mayúsculas de minúsculas.
+            if (filtros.descripcionContiene){
+                if (!gasto.descripcion.toLowerCase().includes(filtros.descripcionContiene.toLowerCase())) {
+                    return false;
+                }
+            }
+            //Array de etiquetas: si un gasto contiene alguna de las etiquetas indicadas en este parámetro, se deberá devolver en el resultado. Deberá hacerse la comparación de manera que no se distingan mayúsculas de minúsculas.
+            if (filtros.etiquetasTiene){
+                const etiquetasFiltro = filtros.etiquetasTiene.map(e => e.toLowerCase());
+                const etiquetasGasto = gasto.etiquetas.map(e => e.toLowerCase());
+                if (!etiquetasGasto.some(e => etiquetasFiltro.includes(e))) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    }
     function agruparGastos() {}
 
 
