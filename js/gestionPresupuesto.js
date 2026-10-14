@@ -22,16 +22,6 @@ function mostrarPresupuesto() {
 }
 
 function CrearGasto(descripcion, valor, fecha = new Date().toISOString(), ...etiquetas) {
-    /*Función CrearGasto: Actualiza la función constructora para que incluya la fecha y las etiquetas (ver apartado de Objeto gasto). Los parámetros adicionales de la función deben ir a continuación de los existentes.
-· Si no se indican los parámetros de etiquetas, se almacenará en la propiedad etiquetas un array vacío.
-
-· Si no se indica el parámetro fecha, se almacenará en la propiedad fecha la fecha actual.El parámetro fecha deberá ser un string con formato válido que pueda entender la función Date.parse.
-
-· Si la fecha no es válida (no sigue el formato indicado), se deberá almacenar la fecha actual en su lugar.
-
-· Tal como se indica en la sección de objeto gasto, la fecha se almacenará en formato timestamp.Las etiquetas se pasarán como una lista de parámetros de número indeterminado.
-
-· Para añadir las etiquetas se utilizará el método anyadirEtiquetas explicado en la sección de objeto gasto.*/
     this.descripcion = descripcion;
  
     this.valor = 0;
@@ -95,6 +85,16 @@ function CrearGasto(descripcion, valor, fecha = new Date().toISOString(), ...eti
     };
  // Añade las etiquetas recibidas en el constructor
     this.anyadirEtiquetas(...etiquetas);
+
+    this.obtenerPeriodoAgrupacion = function (periodo) {
+        if (periodo === "dia") {
+            return new Date(this.fecha).toISOString().slice(0, 10);
+        } else if (periodo === "mes") {
+            return new Date(this.fecha).toISOString().slice(0, 7);
+        } else if (periodo === "anyo") {
+            return new Date(this.fecha).toISOString().slice(0, 4);
+        }
+    };
 }
 //Función listarGastos: Función sin parámetros que devolverá la variable global gastos.
     function listarGastos() {
@@ -132,6 +132,12 @@ Función sin parámetros que devuelva el balance (presupuesto - gastos totales) 
         return presupuesto - calcularTotalGastos();
     }
 
+    function filtrarGastos() {}
+
+    function agruparGastos() {}
+
+
+
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
 // Si al obtener el código de una práctica se genera un conflicto, por favor incluye todo el código que aparece aquí debajo.
@@ -143,5 +149,7 @@ export   {
     anyadirGasto,
     borrarGasto,
     calcularTotalGastos,
-    calcularBalance
+    calcularBalance,
+    filtrarGastos,
+    agruparGastos
 }
