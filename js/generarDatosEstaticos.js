@@ -34,3 +34,7 @@ for (let gasto of gPresupuesto.filtrarGastos({ fechaDesde: "2021-09-01", fechaHa
 for (let gasto of gPresupuesto.filtrarGastos({ valorMinimo: 50 })) {
     gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-2", gasto);
 }
+
+for (let gasto of gPresupuesto.filtrarGastos({ valorMinimo: 200, etiquetasTiene: ["seguros"] })) {
+    gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-3", gasto);
+}
