@@ -38,3 +38,9 @@ for (let gasto of gPresupuesto.filtrarGastos({ valorMinimo: 50 })) {
 for (let gasto of gPresupuesto.filtrarGastos({ valorMinimo: 200, etiquetasTiene: ["seguros"] })) {
     gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-3", gasto);
 }
+
+for (let gasto of gPresupuesto.filtrarGastos({ valorMaximo: 50, etiquetasTiene: ["comida", "transporte"] })) {
+    gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-4", gasto);
+}
+
+
