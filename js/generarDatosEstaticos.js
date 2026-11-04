@@ -30,3 +30,7 @@ for (let gasto of gPresupuesto.listarGastos()) {
 for (let gasto of gPresupuesto.filtrarGastos({ fechaDesde: "2021-09-01", fechaHasta: "2021-09-30" })) {
     gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-1", gasto);
 }
+
+for (let gasto of gPresupuesto.filtrarGastos({ valorMinimo: 50 })) {
+    gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-2", gasto);
+}
