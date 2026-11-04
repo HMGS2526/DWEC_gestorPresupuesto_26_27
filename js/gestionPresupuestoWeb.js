@@ -1,6 +1,6 @@
 function mostrarDatoEnId(idElemento, valor){
     const elemento = document.getElementById(idElemento);
-    elemento.textContent = String(valor);
+    elemento.textContent = valor;
 }
 function mostrarGastoWeb(idElemento, gasto){
     const divMaestro = document.createElement('div');
@@ -24,18 +24,18 @@ function mostrarGastoWeb(idElemento, gasto){
 
     const divEtiquetas = document.createElement('div');
     divEtiquetas.className = 'gasto-etiquetas';
-    divMaestro.append(divEtiquetas);
 
     for (let etiqueta of gasto.etiquetas) {
         const spanEtiqueta = document.createElement('span');
-        spanEtiqueta.className = 'gasto-etiqueta';
-        spanEtiqueta.textContent = etiqueta;
+        spanEtiqueta.className = 'gasto-etiquetas-etiqueta';
+        spanEtiqueta.textContent = etiqueta + " ";
         divEtiquetas.append(spanEtiqueta);
     }
-
-
-
+    divMaestro.append(divEtiquetas);
 }
+function mostrarGastosAgrupadosWeb(){}
+
+
 export{
     mostrarDatoEnId,
     mostrarGastoWeb,

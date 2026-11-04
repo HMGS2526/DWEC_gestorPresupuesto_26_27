@@ -1,19 +1,32 @@
 import * as gPresupuesto from './gestionPresupuesto.js';
 import * as gPresupuestoWeb from './gestionPresupuestoWeb.js';
 
-gPresupuesto.actualizarPresupuesto();
-let g1 = new gPresupuesto.Gasto("Compra carne", 23.44, "2021-10-06", "casa", "comida");
-let g2 = new gPresupuesto.Gasto("Compra fruta y verdura", 14.25, "2021-09-06", "supermercado", "comida");
-let g3 = new gPresupuesto.Gasto("Bonobús", 18.60, "2020-05-26", "transporte");
-let g4 = new gPresupuesto.Gasto("Gasolina", 60.42, "2021-10-08", "transporte", "gasolina");
-let g5 = new gPresupuesto.Gasto("Seguro hogar", 206.45, "2021-09-26", "casa", "seguros");
-let g6 = new gPresupuesto.Gasto("Seguro coche", 195.78, "2021-10-06", "transporte", "seguros");
-
-gPresupuestoWeb.anyadirGasto(g1);
-gPresupuestoWeb.anyadirGasto(g2);
-gPresupuestoWeb.anyadirGasto(g3);
-gPresupuestoWeb.anyadirGasto(g4);
-gPresupuestoWeb.anyadirGasto(g5);
-gPresupuestoWeb.anyadirGasto(g6);
-
+gPresupuesto.actualizarPresupuesto(1500);
 gPresupuestoWeb.mostrarDatoEnId("presupuesto", gPresupuesto.mostrarPresupuesto());
+
+let g1 = new gPresupuesto.CrearGasto("Compra carne", 23.44, "2021-10-06", "casa", "comida");
+let g2 = new gPresupuesto.CrearGasto("Compra fruta y verdura", 14.25, "2021-09-06", "supermercado", "comida");
+let g3 = new gPresupuesto.CrearGasto("Bonobús", 18.60, "2020-05-26", "transporte");
+let g4 = new gPresupuesto.CrearGasto("Gasolina", 60.42, "2021-10-08", "transporte", "gasolina");
+let g5 = new gPresupuesto.CrearGasto("Seguro hogar", 206.45, "2021-09-26", "casa", "seguros");
+let g6 = new gPresupuesto.CrearGasto("Seguro coche", 195.78, "2021-10-06", "transporte", "seguros");
+
+
+gPresupuesto.anyadirGasto(g1);
+gPresupuesto.anyadirGasto(g2);
+gPresupuesto.anyadirGasto(g3);
+gPresupuesto.anyadirGasto(g4);
+gPresupuesto.anyadirGasto(g5);
+gPresupuesto.anyadirGasto(g6);
+
+gPresupuestoWeb.mostrarDatoEnId("gastos-totales", gPresupuesto.calcularTotalGastos());
+
+gPresupuestoWeb.mostrarDatoEnId("balance-total", gPresupuesto.calcularBalance());
+
+for (let gasto of gPresupuesto.listarGastos()) {
+    gPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", gasto);
+}
+
+for (let gasto of gPresupuesto.filtrarGastos({ fechaDesde: "2021-09-01", fechaHasta: "2021-09-30" })) {
+    gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-1", gasto);
+}
