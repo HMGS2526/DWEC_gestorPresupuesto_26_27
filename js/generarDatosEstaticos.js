@@ -19,9 +19,9 @@ gPresupuesto.anyadirGasto(g4);
 gPresupuesto.anyadirGasto(g5);
 gPresupuesto.anyadirGasto(g6);
 
-gPresupuestoWeb.mostrarDatoEnId("gastos-totales", gPresupuesto.calcularTotalGastos());
+gPresupuestoWeb.mostrarDatoEnId("gastos-totales", gPresupuesto.calcularTotalGastos().toFixed(2));
 
-gPresupuestoWeb.mostrarDatoEnId("balance-total", gPresupuesto.calcularBalance());
+gPresupuestoWeb.mostrarDatoEnId("balance-total", gPresupuesto.calcularBalance().toFixed(2));
 
 for (let gasto of gPresupuesto.listarGastos()) {
     gPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", gasto);
@@ -42,5 +42,11 @@ for (let gasto of gPresupuesto.filtrarGastos({ valorMinimo: 200, etiquetasTiene:
 for (let gasto of gPresupuesto.filtrarGastos({ valorMaximo: 50, etiquetasTiene: ["comida", "transporte"] })) {
     gPresupuestoWeb.mostrarGastoWeb("listado-gastos-filtrado-4", gasto);
 }
+
+gPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-dia", gPresupuesto.agruparGastos("dia"), "día")
+
+gPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-mes", gPresupuesto.agruparGastos("mes"), "mes")
+
+gPresupuestoWeb.mostrarGastosAgrupadosWeb("agrupacion-anyo", gPresupuesto.agruparGastos("anyo"), "año")
 
 
