@@ -73,10 +73,18 @@ function repintar(){
     document.getElementById('listado-gastos-completo').innerHTML = '';
 
     for (let gasto of gPresupuesto.listarGastos()) {
-        gPresupuestoWeb.mostrarGastoWeb("listado-gastos-completo", gasto);
+        mostrarGastoWeb("listado-gastos-completo", gasto);
     }
 
 }
+function actualizarPresupuestoWeb(){
+    let presupuesto = prompt("Introduzca el nuevo presupuesto")
+    presupuesto = parseFloat(presupuesto);
+    gPresupuesto.actualizarPresupuesto(presupuesto);
+    repintar();
+}
+let botonActualizar = document.getElementById('actualizarpresupuesto');
+botonActualizar.addEventListener("click", actualizarPresupuestoWeb);
 
 
 export{
